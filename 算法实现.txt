@@ -1,0 +1,82 @@
+
+#include<stdio.h>
+#include<stdlib.h>
+
+    //结构体定义物品数量，属性数量，价值重量，约束上限
+struct item
+{
+           int a;						
+           int b;						
+           double value[100];			
+           int weight[50][100];			
+           int limit[100];				
+}
+
+Importance;          
+int x[50];						
+int flag[50];                   //标志最优选取方案
+double maxValue = 0;            
+double nowValue = 0;           
+double nowWeight[100];			
+
+//判断当前背包加上新物品的约束是否会超出背包约束上限
+bool Condition(int y){
+	int i;
+	for (i = 0; i < Importance.b; i++)
+	{
+	if (nowWeight[i] + Importance.weight[i][y] <= Importance.limit[i])
+		continue;
+		else break;
+	}
+	if (i == Importance.b) 
+		return true;
+	else
+		return false;
+}
+void BackTrack(int y)
+{
+		if (y >= Importance.a) 
+	              {   
+		if (nowValue >= maxValue)				
+		{   
+		maxValue = nowValue;    			//将目前的价值和最大价值交换
+		for (int i = 0; i < Importance.a; i++) 	
+		{    
+		              flag[i] = x[i];
+		}
+}
+		return;
+}
+
+	             if ( Condition(y) ) 			
+{  
+		for (int i = 0; i < Importance.b; i++)
+		{
+		nowWeight[i] += now.weight[i][y];       
+		}
+		nowValue += Importance.value[y];   		//更新最大价值 
+		x[y] = 1;                    //将物品放入背包 
+			
+		BackTrack(y + 1);          
+		for (int i = 0; i < Importance.b; i++) 				
+		{
+		nowWeight[i] -= Importance.weight[i][y];        
+		}
+		nowValue -= Importance.value[y];					
+		x[y] = 0;		  //物品不放入背包 
+
+}	
+
+		BackTrack(y+ 1);
+}
+	
+	//初始化	
+	maxValue = 0;					
+	nowValue = 0;
+	for (int i = 0; i < Importance.b; i++)
+	{
+		nowWeight[i] = 0;
+	}	
+		
+	return 0;
+}
